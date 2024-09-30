@@ -1,7 +1,5 @@
 # SemSR
 
-# FractureSeg3D
-
 This is the official repository for "A Super-resolution Framework with Semantic Guidance for Restoring Pore-Solid Interface Roughness to Enhance the Accuracy of Digital Rock Transport Properties". Please cite this work if you find this repository useful for your project.
 
 
