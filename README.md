@@ -7,6 +7,10 @@ This is the official repository for "A Super-resolution Framework with Semantic 
 The roughness of pore walls is a crucial factor in studying fluid flow within the pore space. Combining data from different imaging modalities and using deep learning-based super-resolution (SR) methods, a comprehensive view with intricate specific features would be obtained.The relationship between pore wall and pore space is typically representative of geological characterization, which distinguishes among different components. However, current SR methods often overlook geological component regions and incorporate various mechanisms that increase the model's weight and computational demands. To tackle these issues, we employ a Generative Adversarial Network and propose a semantic sharing mechanism to collaborate with the injection of geological characterization. In addition, matching low-resolution (LR) and high-resolution (HR) images is a major challenge. It is common practice to down-sample HR images to obtain pairs of LR images. However, the LR images obtained by these methods still contain lots of details, which weakens the model's generalization ability in real-world scenarios. Therefore, we developed a novel method that introduces intentional blurring noises and multi-sampling operations utilized during data augmentation. Finally, we compare our method with other state-of-the-art methods using proposed indicators to recover the true characteristics of the hole wall, proving the superiority of our method.
 
 
+![network](network.png)
+
+
+
 
 ## Usage
 
@@ -34,12 +38,7 @@ Image data is expected to be stored using the following file structure for data 
 |     +--[image number with three digits e.g. 000 or 015].tif
 |  +--sem/
 |     +--[image number].tif
-|  +--charge/
-|     +--[image number].tif
-|  +--lowdensity/
-|     +--[image number].tif
-|  +--highdensity/
-|     +--[image number].tif
+
 |
 +--val/
 |  + ...
@@ -149,13 +148,6 @@ The framework will output the results in the following file structure:
 |
 +--/[model name]
    |
-   +--/charge (charge region mask)
-      +--[image patch number with three digits].png
-      +--...
-   +--/highdensity (high density region mask)
-      +--...
-   +--/lowdensity (low region mask)
-      +--...
    +--/sem (ground truth SEM image)
       +--...
    +--/sem_fake (predicted SEM image)
@@ -187,7 +179,7 @@ Here we summarize the command line arguments used across all models.
 **General commands**
 
 Basic parameters:
-* ``--dataroot``: path to images. Should have subfolders ``training``, ``val``, and ``test``, which should each have subfolders ``TXM and ``SEM``
+* ``--dataroot``: path to images. Should have subfolders ``training``, ``val``, and ``test``
 * ``--name``: ame of the experiment. It decides where to store samples and models.
 * ``--gpu_ids``: gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU.
 * ``--checkpoints_dir``: models are saved here (default: ``./checkpoints``).
