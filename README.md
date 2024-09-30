@@ -11,7 +11,6 @@ The roughness of pore walls is a crucial factor in studying fluid flow within th
 
 
 
-
 ## Usage
 
 The model is run through a command line interface. We strongly recommend installing [Anaconda](https://www.anaconda.com/products/individual) as it includes most of the packages needed for this code base, and the ``conda`` package management system is able to install almost everything required. 
