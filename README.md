@@ -15,7 +15,7 @@ Most current super-resolution methods focus on the gray-scale variation or pixel
 The model is run through a command line interface. We strongly recommend installing [Anaconda](https://www.anaconda.com/products/individual) as it includes most of the packages needed for this code base, and the ``conda`` package management system is able to install almost everything required. 
 
 
-## Data 
+### Data 
 
 Image data is expected to be stored using the following file structure for data loaders:
 ```
