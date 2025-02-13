@@ -142,7 +142,7 @@ class SRGANModel(BaseModel):
         # Second, G(A) = B
         self.loss_G_L1 = self.criterionL1(self.fake_B, self.real_B) * self.opt.lambda_L1
         
-        #self.loss_G_L1_FFT = self.LOSS.FFT(self.fake_B, self.real_B)
+        self.loss_G_L1_FFT = self.LOSS.FFT(self.fake_B, self.real_B)
         
         # Third, grad G(A)
         # self.loss_G_img_grad, _ = networks.cal_image_grad_penalty(self.fake_B, self.real_A, 
