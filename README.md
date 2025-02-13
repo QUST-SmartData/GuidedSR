@@ -14,18 +14,8 @@ Most current super-resolution methods focus on the gray-scale variation or pixel
 
 The model is run through a command line interface. We strongly recommend installing [Anaconda](https://www.anaconda.com/products/individual) as it includes most of the packages needed for this code base, and the ``conda`` package management system is able to install almost everything required. 
 
-### Setup
 
-To begin, first install the dependencies listed here. The code requires the following packages listed below. Unless otherwise stated, these packages can be installed using ``conda`` or ``pip``
-- ``torch``: install from the [PyTorch website](https://pytorch.org/)
-- ``skimage``
-- ``PIL``
-- ``re``
-- ``glob``
-- ``dominate``
-- ``visdom``: install with ``pip``
-
-### Data 
+## Data 
 
 Image data is expected to be stored using the following file structure for data loaders:
 ```
@@ -49,37 +39,6 @@ The data loaders rely on folders and filenames appearing in this specific form. 
 
 Dataset files can be found in the ``./data/`` folder. The framework implements four data loaders depending on the application. The specific dataset to use is selected with the ``--dataset`` option during training and testing. 
 
-**TXM2SEM**
-
-The ``txm2sem_dataset.py`` file contains the main dataset for this framework. 
-
-Command line options specific to this data loader are:
-- ``--aligned``: optionally use aligned or unaligned image patches
-- ``--eval_mode``: determines whether dataset has fixed indices (for evaluation) or random (for sampling during training)
-- ``--patch_size``: image patch size when performing subsampling
-- ``--txm_dir``: TXM image directory. This and all image directories below can be controlled using command line options but this is highly discouraged.
-- ``--sem_dir``: SEM image directory
-- ``--charge_dir``: charge region segmentation directory
-- ``--lowdens_dir``: low density region segmentation directory
-- ``--highdens_dir``: high density region segmentation directory
-- ``--num_train``: number of datapoints in each training epoch
-
-**Image Repair**
-
-The ``image_repair_data.py`` loader functions very similarly to the ``txm2sem_dataset.py`` loader, with the only major difference being the form of the data output during sampling. Command line options specific for this data loader are the same as for the ``txm2sem_dataset.py`` loader above.
-
-**TXM2SEM3D**
-
-The ``txm2sem3d_dataset.py`` file contains a short dataloader to load TXM image volumes from the test set folder. TXM images in the ``/test/txm_full_stack/`` folder should be full image slices (uncropped). The code uses the ``x_ind`` and ``y_ind`` arguments as the top-left corner of the image patch from each slice. In this way, the subvolume to process can be controlled from the command line. 
-
-Command line options specific to this data loader are:
-- ``--patch_size``: image patch size when performing subsampling
-   - This is also the size of the image volume in the z-direction. 
-- ``--save_name``: directory to store the saved volume in the results folder
-- ``--x_ind``: x-index for sampling image patches
-- ``--y_ind``: y-index for sampling image patches 
-- ``--z_ind``: z-index for sampling image patches 
-   - The TXM image filenames are sorted descending in alpha-numeric order and the TXM volume is taken from successive image slices. ``z_ind`` will be the offset from the first file to start sampling. For example, if image filenames start with ``txm_full157.png`` and end with ``txm_full426.png``, then ``--z_ind 3`` will start evaluation with ``txm_full160.png``. If there are not enough files to start at the given ``z_ind`` and produce a volume of the size specified by ``patch_size``, then the code will return an error message and terminate without evaluating any images. 
 
 
 ### Training a model
@@ -90,7 +49,7 @@ The model is trained using the ``train.py`` script. For example, you can train a
 python train.py --name srgan_img100 --model srgan --netG sr_resnet_9blocks --niter 50 --niter_decay 25 --downsample_factor 4 --patch_size 128 --lambda_img_grad 1e-4
 ```
 
-The pre-trained model is saved as iter_4_net_G.pth and can be find in directory `pretrained_model`. It is used for patch_size=256.
+The pre-trained model is saved as iter_4_net_G.pth and can be find in directory `pretrained`. It is used for patch_size=256.
 
 
 ### Loading and testing a model 
