@@ -18,6 +18,7 @@ The model is run through a command line interface. We strongly recommend install
 ### Data 
 
 Image data is expected to be stored using the following file structure for data loaders:
+
 ```
 ./images/
 |
@@ -25,6 +26,12 @@ Image data is expected to be stored using the following file structure for data 
 |  +--txm/
 |     +--[image number with three digits e.g. 000 or 015].tif
 |  +--sem/
+|     +--[image number].tif
+|  +--charge/
+|     +--[image number].tif
+|  +--lowdensity/
+|     +--[image number].tif
+|  +--highdensity/
 |     +--[image number].tif
 |
 +--val/
@@ -34,10 +41,9 @@ Image data is expected to be stored using the following file structure for data 
 |  +--txm_full_stack/
 |     +--[image number in z-axis order, unrelated to the numbers of the aligned slices].tif
 ```
+The data loaders rely on folders and filenames appearing in this specific form. If the images are not places in the correct folder, the dataloader will not be able to find them. Aligned image slices should appear with the same file names in the `txm`, `sem`, `charge`, `lowdensity`, and `highdensity` folders. This is how the code is able to track which slices are aligned with which. The `txm_full_stack` folder in the `test/` contains TXM images from a contiguous volume where each slice is numbered according to its slice number in the z-axis.
 
-The data loaders rely on folders and filenames appearing in this specific form. If the images are not places in the correct folder, the dataloader will not be able to find them. Aligned image slices should appear with the same file names in the ``txm``, ``sem``, ``charge``, ``lowdensity``, and ``highdensity`` folders. This is how the code is able to track which slices are aligned with which. The ``txm_full_stack`` folder in the ``test/`` contains TXM images from a contiguous volume where each slice is numbered according to its slice number in the z-axis. 
-
-Dataset files can be found in the ``./data/`` folder. The framework implements four data loaders depending on the application. The specific dataset to use is selected with the ``--dataset`` option during training and testing. 
+Dataset files can be found in the `./data/` folder. The framework implements four data loaders depending on the application. The specific dataset to use is selected with the `--dataset` option during training and testing.
 
 
 
